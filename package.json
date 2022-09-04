@@ -11,8 +11,23 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "@codemirror/commands": "^6.1.0",
+    "@codemirror/gutter": "^0.19.9",
+    "@codemirror/highlight": "^0.19.8",
+    "@codemirror/history": "^0.19.2",
+    "@codemirror/lang-javascript": "^6.0.2",
+    "@codemirror/lang-markdown": "^6.0.1",
+    "@codemirror/language": "^6.2.1",
+    "@codemirror/matchbrackets": "^0.19.4",
+    "@codemirror/state": "^6.1.1",
+    "codemirror": "^6.0.1",
     "electron-serve": "^1.1.0",
-    "electron-store": "^8.1.0"
+    "electron-store": "^8.1.0",
+    "import": "^0.0.6",
+    "remark-cli": "^11.0.0",
+    "remark-preset-lint-consistent": "^5.1.1",
+    "remark-preset-lint-recommended": "^6.1.2",
+    "remark-toc": "^8.0.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.7",
