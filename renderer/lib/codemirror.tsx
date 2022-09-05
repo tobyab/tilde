@@ -15,11 +15,6 @@ let startState = EditorState.create({
     extensions: [keymap.of(defaultKeymap)]
 })
 
-let view = new EditorView({
-    state: startState,
-    parent: document.body
-})
-
 interface States {
     initalUpdate: string,
     onUpdate?: (state:EditorState) => void

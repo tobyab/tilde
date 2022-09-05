@@ -23,11 +23,15 @@
     "codemirror": "^6.0.1",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.1.0",
+    "hast-util-sanitize": "^4.0.0",
     "import": "^0.0.6",
     "remark-cli": "^11.0.0",
+    "remark-gfm": "^3.0.1",
     "remark-preset-lint-consistent": "^5.1.1",
     "remark-preset-lint-recommended": "^6.1.2",
-    "remark-toc": "^8.0.1"
+    "remark-react": "^9.0.1",
+    "remark-toc": "^8.0.1",
+    "unified": "^10.1.2"
   },
   "devDependencies": {
     "@types/node": "^16.11.7",

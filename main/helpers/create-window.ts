@@ -26,6 +26,7 @@ export default (windowName: string, options: BrowserWindowConstructorOptions): B
       y: position[1],
       width: size[0],
       height: size[1],
+      titleBarStyle: 'hiddenInset',
     };
   };
 
