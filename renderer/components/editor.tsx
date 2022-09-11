@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useEffect } from "react"
 import CodeMirror from "../lib/codemirror"
 
 interface States {
@@ -6,8 +6,8 @@ interface States {
     onUpdate: (doc:string) => void
 }
 
-const Editor: React.FC<States> = (states) => {
-    const { onUpdate, initalUpdate } = states
+const Editor = (States) => {
+    const { onUpdate, initalUpdate } = States
     const handleUpdates = useCallback (
         state => onUpdate(state.doc.toString()),
         [onUpdate]
@@ -16,7 +16,14 @@ const Editor: React.FC<States> = (states) => {
         initalUpdate: initalUpdate,
         onUpdate: handleUpdates
     })
-    return <div className="" ref={refContainer}/>
+
+    useEffect(() => {
+        if (editorView) {
+            null
+        }
+    }, [editorView])
+
+    return <div ref={refContainer}/>
 }
 
 export default Editor

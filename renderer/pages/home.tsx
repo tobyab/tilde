@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Nav from "../components/nav";
 import Editor from "../components/editor"
+import { Preview } from "../components/preview"
 import { useState, useCallback } from "react"
 
 function Home() {
@@ -11,11 +12,13 @@ function Home() {
   return (
     <>
       <Head>
-        <title>tilde</title>
+        <title>Tilde</title>
       </Head>
       <div>
         <Nav/>
-        {/*<Editor onUpdate={handleDocChange} initalUpdate={doc} />*/}
+        {/*
+        <Editor onUpdate={handleDocChange} initalUpdate={doc} />
+        */}
       </div>
     </>
   );

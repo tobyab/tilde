@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm"
 import remarkReact from "remark-react"
 import { defaultSchema } from "hast-util-sanitize"
 import React from "react"
+import { Code } from "./code"
 
 interface Props { document: string }
 
@@ -15,12 +16,15 @@ const schema = {
     }
 }
 //export default function Preview(Props) {
-const Preview = (Props) => {
+export const Preview = (Props) => {
     const md = unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkReact, {
         createElement: React.createElement,
-        sanitize: schema
+        sanitize: schema,
+        remarkReactComponents : {
+            code: Code
+        },
     })
 }
