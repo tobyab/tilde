@@ -7,13 +7,18 @@ import { history } from "@codemirror/history"
 import { defaultKeymap } from "@codemirror/commands"
 import { indentOnInput } from "@codemirror/language"
 import { lineNumbers, highlightActiveLineGutter } from "@codemirror/gutter"
-import { defaultHighlightStyle, HighlightStyle } from "@codemirror/highlight"
-import { markdown, markdownLanguage } from "@codemirror/lang-markdown"
 
 let startState = EditorState.create({
-    doc: "Hello World",
-    extensions: [keymap.of(defaultKeymap)]
+    doc: "Example Note",
+    extensions: [basicSetup, keymap.of(defaultKeymap)]
 })
+
+function openMenu() {
+    return keymap.of ([{
+        key: "Cmd-e",
+        run() { console.log("Hello, sidebar!"); return true }
+    }])
+}
 
 interface States {
     initalUpdate: string,
@@ -25,17 +30,16 @@ const CodeMirror = <T extends Element>(
 ): [React.MutableRefObject<T | null>, EditorView?] => {
     const refContainer= useRef<T>(null)
     const [editorView, setEditorView] = useState<EditorView>()
-    const { onUpdate } = states
 
     useEffect(() => {
-        if(!refContainer.current) return
+        if (!refContainer.current) return
 
         const startState = EditorState.create({
             doc: states.initalUpdate,
             extensions: [
                 history(),
-                indentOnInput(),
                 lineNumbers(),
+                indentOnInput(),
                 highlightActiveLineGutter(),
             ]
         })

@@ -1,11 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react"
 import CodeMirror from "../lib/codemirror"
 
-interface States {
-    initalUpdate: string,
-    onUpdate: (doc:string) => void
-}
-
 const Editor = (States) => {
     const { onUpdate, initalUpdate } = States
     const handleUpdates = useCallback (
@@ -19,7 +14,7 @@ const Editor = (States) => {
 
     useEffect(() => {
         if (editorView) {
-            null
+            <h1>Hello, world!</h1>
         }
     }, [editorView])
 
