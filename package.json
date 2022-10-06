@@ -25,6 +25,7 @@
     "electron-store": "^8.1.0",
     "hast-util-sanitize": "^4.0.0",
     "import": "^0.0.6",
+    "react-markdown": "^8.0.3",
     "remark-cli": "^11.0.0",
     "remark-gfm": "^3.0.1",
     "remark-preset-lint-consistent": "^5.1.1",
