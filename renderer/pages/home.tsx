@@ -1,8 +1,12 @@
 import Head from "next/head";
+import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import { SyntaxHighlighter } from "react-syntax-highlighter";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import { MagnifyingGlass, Pen } from "../components/icons"
 import Nav from "../components/nav"
-import { useState, useReducer, useCallback } from "react"
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
 
 function Home() {
   const [reader, setReader] = useState(false)
@@ -16,39 +20,64 @@ function Home() {
   * [x] give
   * [x] you
   * [x] up
+  
+  ($C_L$)
   `)
-
   return (
     <div>
       <Head>
         <title>Tilde</title>
       </Head>
-      {/*<Nav/>*/}
       <button
-          onClick={() => setReader(setReader => !setReader)}
-          className="float-right"
-        >
-        Click me!
+        onClick={() => setReader(setReader => !setReader)}
+        className="float-right cursor-pointer m-4 bg-red-400"
+      >
+        {!reader && (
+          <MagnifyingGlass />
+        )}
+        {reader && (
+          <Pen />
+        )}
       </button>
-        <div className="flex justify-center bg-red-400 h-screen mt-16 mx-8 space-x-2">
-          {!reader &&(
-            <textarea
-              className="w-screen h-screen"
-              onChange={(e) => setDoc(e.target.value)}
-              value={doc || ""}
-              autoFocus
-            />
-          )}
-          {reader && (
-            <ReactMarkdown 
-              children={doc} 
-              remarkPlugins={[[remarkGfm, { singleTilde: true }]]}
-              className="w-screen"
-            />
-          )}
-        </div>
+      <div className="flex justify-center bg-red-400 h-screen mr-8 space-x-2">
+        <Nav />
+        {!reader && (
+          <textarea
+            className="w-4/5 h-screen outline-0 cursor-text mt-16 text-lg"
+            onChange={(e) => setDoc(e.target.value)}
+            value={doc || ""}
+            autoFocus
+          />
+        )}
+        {reader && (
+          <ReactMarkdown
+            children={doc}
+            remarkPlugins={[[remarkGfm, { singleTilde: true }], [remarkMath]]}
+            rehypePlugins={[rehypeKatex]}
+            className="w-4/5 h-screen mt-16 text-lg"
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                const resCode = /language-(\w+)/.exec(className || "")
+                return !inline && resCode ? (
+                  <SyntaxHighlighter
+                    children={String(children).replace(/\n$/, "")}
+                    language={resCode[1]}
+                    pretag="div"
+                    {...props}
+                  />
+                ) : (
+                  <code  {...props}>
+                    {children}
+                  </code>
+                )
+              },
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }
 
 export default Home;
+
