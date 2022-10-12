@@ -3,7 +3,7 @@ import {
   BrowserWindow,
   BrowserWindowConstructorOptions,
 } from 'electron';
-import Store from 'electron-store';
+const Store = require("electron-store")
 
 export default (windowName: string, options: BrowserWindowConstructorOptions): BrowserWindow => {
   const key = 'window-state';
@@ -27,6 +27,7 @@ export default (windowName: string, options: BrowserWindowConstructorOptions): B
       width: size[0],
       height: size[1],
       titleBarStyle: 'hiddenInset',
+      icon: path.join(__dirname, 'resources/icon.icns')
     };
   };
 
