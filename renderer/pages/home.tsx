@@ -7,30 +7,41 @@ import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 import Drawer from "../components/drawer"
 import { Dots, MagnifyingGlass, Pen, Save, Add } from "../components/icons"
+import React, { useEffect } from "react"
 
 function Home() {
   const [reader, setReader] = useState(false)
   const [showDraw, setShowDraw] = useState(false)
-  const [docName, setDocName] = useState("Untitled")
+  const [docName, setDocName] = useState("Hello, Tilde!")
   const [doc, setDoc] = useState<string>(``)
 
   const save = () => {
-    let md = localStorage.setItem(docName,
+    let md = localStorage.setItem("note",
       JSON.stringify({
+        docName,
         doc
       })
     )
   }
 
-  const createNote = () => {
-    localStorage.setItem(docName, "newDoc")
+  const getNote = () => {
+    localStorage.getItem("document")
+    if (document) return JSON.parse(doc)[docName]
+  }
+
+  useEffect(() => {
+    const getAllNotes = () => {
+      localStorage.getItem("note")
+      if (document) return Object.keys (JSON.parse(doc))
+    }
+  }, [])
+
+  function NoteSidebar() {
+    save()
     return (
-      <form>
-        <input
-          onChange={(e) => setDocName(e.target.value)}
-          value="Untitled"
-        />
-      </form>
+      <div className="rounded-md hover:bg-gray-100 cursor-pointer py-1 w-max px-4">
+        <h1>{docName}</h1>
+      </div>
     )
   }
 
@@ -56,7 +67,6 @@ function Home() {
             <Pen />
           )}
         </button>
-        
         <button
           onClick={() => setShowDraw(true)}
         >
@@ -70,13 +80,14 @@ function Home() {
         )}
       </div>
       <div className="flex justify-center bg-red-400 mr-8 space-x-2 h-screen">
-        <div className="bg-gray-50 pt-16 w-96 h-auto border-r mr-16">
-            <div className="pl-10">
-                <h1 className="font-semibold text-3xl">All notes</h1>
-            </div>
+        <div className="bg-gray-50 pt-16 h-auto border-r mr-16 w-1/3">
+              <h1 className="font-semibold text-3xl ml-8">All notes</h1>
+              <div className="mt-8 ml-4 space-y-2">
+                <NoteSidebar/>
+              </div>
             <button
-              className="float-end absolute bottom-0 text-gray-500 text-lg flex mb-4 pl-4"
-              onClick={() => createNote()}
+              className="float-end absolute bottom-0 text-gray-500 text-lg flex mb-4 ml-4"
+              onClick={() => alert("Gadzooks!")}
             >
               <Add/>&nbsp; New note
             </button>
@@ -87,7 +98,7 @@ function Home() {
             className="w-screen outline-0 cursor-text pt-16 text-lg"
             onChange={(e) => setDoc(e.target.value)}
             value={doc || ""}
-            placeholder="Start typing..."
+            placeholder="Your best ideas here..."
             autoFocus
           />
         )}
