@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@types/node": "16.18.0",
-    "@types/react": "18.0.21",
+    "@types/react": "18.0.24",
     "autoprefixer": "^10.4.7",
     "electron": "21.0.1",
     "electron-builder": "23.6.0",
